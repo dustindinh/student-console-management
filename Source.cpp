@@ -1,4 +1,4 @@
-﻿#include<iostream>
+#include<iostream>
 #include<conio.h>
 #include<string>
 #include <iomanip>
@@ -9,10 +9,10 @@ using namespace std;
 
 /* TÀI KHOẢNG CỦA GIÁO VIÊN / HỌC SINH */
 
-#define TEACHER_USERNAME "a"
-#define TEACHER_PASSWORD "a"
-#define STUDENT_USERNAME "b"
-#define STUDENT_PASSWORD "b"
+#define TEACHER_USERNAME "trucvy"
+#define TEACHER_PASSWORD "123abc!"
+#define STUDENT_USERNAME "sinhvien"
+#define STUDENT_PASSWORD "123123"
 
 void callMain();
 typedef struct Student {
@@ -414,7 +414,7 @@ void printMenuChoose() {
 
 	cout << "\n [!!!] CHU Y: De co the xem duoc tat ca danh" << endl;
 	cout << " sach diem cua sinh vien thi man hinh console" << endl;
-	cout << " cua ban phai de o che do full screen moi co "<<endl;
+	cout << " cua ban phai de o che do full screen moi co " << endl;
 	cout << " the xem het vi danh sach rat nhieu diem va\n du lieu." << endl;
 
 	cout << "\n Hay nhap so de chon tinh nang tuong ung" << endl;
@@ -436,27 +436,34 @@ int getChoosePerm() {
 	cin >> choose;
 
 	switch (choose) {
-		case 1:
-			return 0;
-			break;
-		case 2:
-			return 1;
-			break;
-		case 3:
-			return -1;
-			break;
+	case 1:
+		return 0;
+		break;
+	case 2:
+		return 1;
+		break;
+	case 3:
+		return -1;
+		break;
 	}
 }
-bool isRegistedAccount(string username, string password) {
+bool isRegistedAccount(string username, string password, int perm) {
 
-	if (username == TEACHER_USERNAME) {
-		if (password == TEACHER_PASSWORD) {
-			return true;
+	if (perm == 1) {
+		if (username == TEACHER_USERNAME) {
+			if (password == TEACHER_PASSWORD) {
+				return true;
+			}
 		}
-	} else if (username == STUDENT_USERNAME) {
-		if (password == STUDENT_PASSWORD) {
-			return true;
+		return false;
+	}
+	else {
+		if (username == STUDENT_USERNAME) {
+			if (password == STUDENT_PASSWORD) {
+				return true;
+			}
 		}
+		return false;
 	}
 	return false;
 }
@@ -473,17 +480,17 @@ void printLoginMenu(int perm) {
 		client = "GIAO VIEN";
 	else
 		client = "HOC SINH";
-	
+
 	printMenuTitle();
 
-	cout << "\n   DANG NHAP TAI KHOANG "<<client << endl;
+	cout << "\n   DANG NHAP TAI KHOANG " << client << endl;
 	cout << "	 Ten dang nhap\n -> ";
 	cin >> username;
 	cout << "\n         Mat khau\n -> ";
 	cin >> password;
 
-	if (isRegistedAccount(username, password)) {
-		
+	if (isRegistedAccount(username, password, perm)) {
+
 		cout << "Dang nhap thanh cong, vui long doi . . .";
 		Sleep(1500);
 		clrscr();
@@ -493,15 +500,16 @@ void printLoginMenu(int perm) {
 		cout << "TAI KHOANG KHONG CHINH XAC\n 1. Nhap lai\n 2. Tro lai menu\n ->" << endl;
 		cin >> choose;
 		switch (choose) {
-			case 1:
-			default:
-				printLoginMenu(perm);
-				break;
-			case 2:
-				callMain();
-				break;
+		case 1:
+		default:
+			printLoginMenu(perm);
+			break;
+		case 2:
+			clrscr();
+			callMain();
+			break;
 		}
-				
+
 	}
 }
 
@@ -532,8 +540,8 @@ void editStudent(List &l, int MSSV) {
 	int choose;
 	searchStudent(l, MSSV);
 	while (p != NULL) {
-	
-		if ( MSSV == stoi(p->student.MSSV) ) {
+
+		if (MSSV == stoi(p->student.MSSV)) {
 
 			cout << "\nNhap vao mon muon chinnh sua:";
 			cout << "\nNhap 1 de sua diem mon NMLT";
@@ -552,41 +560,41 @@ void editStudent(List &l, int MSSV) {
 
 			cout << "\n Hay nhap du lieu moi" << endl;
 			switch (choose) {
-				case 1:
-					cin >> p->student.NMLT;
-					break;
-				case 2:
-					cin >> p->student.GDTC;
-					break;
-				case 3:
-					cin >> p->student.ANHVAN;
-					break;
-				case 4:
-					cin >> p->student.PLDC;
-					break;
-				case 5:
-					cin >> p->student.TCC;
-					break;
-				case 6:
-					cin >> p->student.TH_NMLT;
-					break;
-				case 7:
-					cin >> p->student.TH_PCMT;
-					break;
-				case 8:
-					cin >> p->student.VLDC;
-					break;
-				case 9:
-					cin >> p->student.THUD;
-					break;
-				case 10:
-					cin >> p->student.PCMT;
-					break;
-				case 11:
-					cin >> p->student.MSSV;
-					break;
-				default:
-					cin >> p->student.hoTen;
+			case 1:
+				cin >> p->student.NMLT;
+				break;
+			case 2:
+				cin >> p->student.GDTC;
+				break;
+			case 3:
+				cin >> p->student.ANHVAN;
+				break;
+			case 4:
+				cin >> p->student.PLDC;
+				break;
+			case 5:
+				cin >> p->student.TCC;
+				break;
+			case 6:
+				cin >> p->student.TH_NMLT;
+				break;
+			case 7:
+				cin >> p->student.TH_PCMT;
+				break;
+			case 8:
+				cin >> p->student.VLDC;
+				break;
+			case 9:
+				cin >> p->student.THUD;
+				break;
+			case 10:
+				cin >> p->student.PCMT;
+				break;
+			case 11:
+				cin >> p->student.MSSV;
+				break;
+			default:
+				cin >> p->student.hoTen;
 			}
 			cout << "\nCap Nhat lai Thong tin Sinh Vien" << endl;
 			printStudent(p);
@@ -616,65 +624,72 @@ void callTeacherMenu() {
 
 		cin >> choose;
 		switch (choose) {
-			case 1:
-				exit = true;
-				clrscr();
-				printMenuTitle();
-				printStudentList(studentList);
+		case 1:
+			exit = true;
+			clrscr();
+			printMenuTitle();
+			printStudentList(studentList);
 
-				cout << "\nAn bat ky de tro lai menu";
-				_getch();
-				break;
-			case 2:
+			cout << "\nAn bat ky de tro lai menu";
+			_getch();
+			break;
+		case 2:
+			printStudentList(studentList);
+			cout << "\nNhap ma so sinh vien\n -> ";
+			cin >> choose;
+			searchStudent(studentList, choose);
 
-				cout << "\nNhap ma so sinh vien\n -> ";
-				cin >> choose;
-				searchStudent(studentList,choose);
+			cout << "\nAn bat ky de tro lai menu";
+			_getch();
+			clrscr();
+			break;
+		case 3:
 
-				cout << "\nAn bat ky de tro lai menu";
-				_getch();
-				clrscr();
-				break;
-			case 3:
-				cout << "Nhap vao MSSV can chinh sua thong tin" << endl;
-				cin >> choose;
-				editStudent(studentList, choose);
+			printStudentList(studentList);
+			cout << "Nhap vao MSSV can chinh sua thong tin" << endl;
+			cin >> choose;
+			editStudent(studentList, choose);
 
-				cout << "\nAn bat ky de tro lai menu";
-				_getch();
-				break;
-			case 4:
-			
-				if (exit){
+			cout << "\nAn bat ky de tro lai menu";
+			_getch();
+			break;
+		case 4:
 
-					cleanArea(15,283);
-					gotoXY(0, 283);
+			if (exit){
 
-				}
+				cleanArea(15, 290);
+				gotoXY(0, 283);
 
-				cout << "\nNhap 1 de sap xep theo mon NMLT";
-				cout << "\nNhap 2 de sap xep theo mon GDTC";
-				cout << "\nNhap 3 de sap xep theo mon ANHVAN";
-				cout << "\nNhap 4 de sap xep theo mon PLDC";
-				cout << "\nNhap 5 de sap xep theo mon TCC";
-				cout << "\nNhap 6 de sap xep theo mon TH_NMLT";
-				cout << "\nNhap 7 de sap xep theo mon TH-PCMT";
-				cout << "\nNhap 8 de sap xep theo mon VLDC";
-				cout << "\nNhap 9 de sap xep theo mon THUD";
-				cout << "\nNhap 10 de sap xep theo mon PCMT\n -> ";
+			}
 
-				cin >> choose;
-				sortStudentListBySubject(studentList, choose);
+			cout << "\nNhap 1 de sap xep theo mon NMLT";
+			cout << "\nNhap 2 de sap xep theo mon GDTC";
+			cout << "\nNhap 3 de sap xep theo mon ANHVAN";
+			cout << "\nNhap 4 de sap xep theo mon PLDC";
+			cout << "\nNhap 5 de sap xep theo mon TCC";
+			cout << "\nNhap 6 de sap xep theo mon TH_NMLT";
+			cout << "\nNhap 7 de sap xep theo mon TH-PCMT";
+			cout << "\nNhap 8 de sap xep theo mon VLDC";
+			cout << "\nNhap 9 de sap xep theo mon THUD";
+			cout << "\nNhap 10 de sap xep theo mon PCMT\n -> ";
 
-				exit = true;
-				break;
-			default:
-				break;
+			cin >> choose;
+			sortStudentListBySubject(studentList, choose);
+			exit = true;
+			clrscr();
+			printMenuTitle();
+			cout << "\nAn bat ky de tro lai menu";
+			printStudentList(studentList);
+			_getch();
+			break;
+
+		default:
+			break;
 		}
 		if (exit) {
 			clrscr();
 			printMenuTitle();
-			printStudentList(studentList);
+
 		}
 	} while (choose != 5);
 }
@@ -697,65 +712,70 @@ void callStudentMenu() {
 
 		cin >> choose;
 		switch (choose) {
-		case 1:
-			exit = true;
-			clrscr();
-			printMenuTitle();
-			printStudentList(studentList);
+			case 1:
+				exit = true;
+				clrscr();
+				printMenuTitle();
+				printStudentList(studentList);
 
-			cout << "\nAn bat ky de tro lai menu";
-			_getch();
-			break;
-		case 2:
+				cout << "\nAn bat ky de tro lai menu";
+				_getch();
+				break;
+			case 2:
+				cout << "\nNhap ma so sinh vien\n -> ";
+				cin >> choose;
+				searchStudent(studentList, choose);
 
-			cout << "\nNhap ma so sinh vien\n -> ";
-			cin >> choose;
-			searchStudent(studentList, choose);
+				cout << "\nAn bat ky de tro lai menu";
+				_getch();
+				clrscr();
+				break;
+			case 3:
 
-			cout << "\nAn bat ky de tro lai menu";
-			_getch();
-			clrscr();
-			break;
-		case 3:
+				if (exit){
 
-			if (exit){
+					cleanArea(15, 290);
+					gotoXY(0, 283);
 
-				cleanArea(15, 283);
-				gotoXY(0, 283);
+				}
 
-			}
+				cout << "\nNhap 1 de sap xep theo mon NMLT";
+				cout << "\nNhap 2 de sap xep theo mon GDTC";
+				cout << "\nNhap 3 de sap xep theo mon ANHVAN";
+				cout << "\nNhap 4 de sap xep theo mon PLDC";
+				cout << "\nNhap 5 de sap xep theo mon TCC";
+				cout << "\nNhap 6 de sap xep theo mon TH_NMLT";
+				cout << "\nNhap 7 de sap xep theo mon TH-PCMT";
+				cout << "\nNhap 8 de sap xep theo mon VLDC";
+				cout << "\nNhap 9 de sap xep theo mon THUD";
+				cout << "\nNhap 10 de sap xep theo mon PCMT\n -> ";
 
-			cout << "\nNhap 1 de sap xep theo mon NMLT";
-			cout << "\nNhap 2 de sap xep theo mon GDTC";
-			cout << "\nNhap 3 de sap xep theo mon ANHVAN";
-			cout << "\nNhap 4 de sap xep theo mon PLDC";
-			cout << "\nNhap 5 de sap xep theo mon TCC";
-			cout << "\nNhap 6 de sap xep theo mon TH_NMLT";
-			cout << "\nNhap 7 de sap xep theo mon TH-PCMT";
-			cout << "\nNhap 8 de sap xep theo mon VLDC";
-			cout << "\nNhap 9 de sap xep theo mon THUD";
-			cout << "\nNhap 10 de sap xep theo mon PCMT\n -> ";
+				cin >> choose;
+				sortStudentListBySubject(studentList, choose);
+				exit = true;
+				clrscr();
+				printMenuTitle();
+				cout << "\nAn bat ky de tro lai menu";
+				printStudentList(studentList);
+				_getch();
+				break;
 
-			cin >> choose;
-			sortStudentListBySubject(studentList, choose);
-
-			exit = true;
-			break;
-		default:
-			break;
+			default:
+				break;
 		}
 		if (exit) {
 			clrscr();
 			printMenuTitle();
-			printStudentList(studentList);
+
 		}
-	} while (choose != 5);
+
+	} while (choose != 4);
 
 }
 
 void main() {
 
-	int choose,clientPerm;
+	int choose, clientPerm;
 	int MSSV, MSSV2;
 
 	studentList.head = studentList.head = NULL;
@@ -769,43 +789,44 @@ void main() {
 
 	cin >> choose;
 
-	switch (choose) {
+	getperm:switch (choose) {
+	case 1:
+		switch (clientPerm = getChoosePerm()) {
 		case 1:
-			switch (clientPerm = getChoosePerm()) {
-				case 1:
-				case 0:
-					break;
-				default:
-					main();
-					break;
-			}
-			break;
-		case 2:
-			system("start mssv_hoten.txt");
-			main();
-			break;
-		case 3:
-			exit(NULL);
+		case 0:
 			break;
 		default:
+			clrscr();
 			main();
 			break;
+		}
+		break;
+	case 2:
+		system("start help.pdf");
+		main();
+		break;
+	case 3:
+		exit(NULL);
+		break;
+	default:
+		main();
+		break;
 	}
 
 	printLoginMenu(clientPerm);
 
 	switch (clientPerm) {
 
-		case 1:
-			callTeacherMenu();
-			break;
-		case 2:
-		default:
-			callStudentMenu();
-			break;
+	case 1:
+		callTeacherMenu();
+		break;
+	case 2:
+	default:
+		callStudentMenu();
+		break;
 	}
 	clrscr();
-	main();
+	goto getperm;
 	_getch();
 
 }
